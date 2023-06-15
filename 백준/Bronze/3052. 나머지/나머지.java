@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Set r = new HashSet();
+        Set<Integer> r = new HashSet<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         for (int i = 0; i < 10; i++) {
             int n = Integer.parseInt(br.readLine());
