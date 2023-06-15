@@ -1,26 +1,18 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        boolean[] r = new boolean[42];
-        for (int i = 0; i < 42; i++) {
-            r[i] = false;
-        }
-
+        Set r = new HashSet();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         for (int i = 0; i < 10; i++) {
             int n = Integer.parseInt(br.readLine());
-            r[n % 42] = true;
+            r.add(n % 42);
         }
 
-        int answer = 0;
-        for (int i = 0; i < 42; i++) {
-            if (r[i] == true) {
-                answer++;
-            }
-        }
-        System.out.println(answer);
+        System.out.println(r.size());
     }
 }
