@@ -9,15 +9,17 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         long A = Long.parseLong(st.nextToken());
         long B = Long.parseLong(st.nextToken());
-        long min = Math.min(A, B);
-        long gcm;
-        long n = 1;
-        while(n <= min) {
-            gcm  = min / n++;
-            if (A % gcm == 0 && B % gcm == 0) {
-                System.out.println(A * B / gcm);
-                break;
-            }
+        long lcm = A * B;
+        if (A < B) {
+            long tmp = B;
+            B = A;
+            A = tmp;
         }
+        while (B > 0) {
+            long tmp = A % B;
+            A = B;
+            B = tmp;
+        }
+        System.out.println(lcm / A);
     }
 }
