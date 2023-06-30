@@ -16,13 +16,13 @@ public class Main {
             if (order.equals("push")) {
                 stack.push(Integer.parseInt(st.nextToken()));
             } else if (order.equals("pop")) {
-                sb.append(stack.isEmpty() ? -1 : stack.pop()).append("\n");
+                sb.append(stack.empty() ? -1 : stack.pop()).append("\n");
             } else if (order.equals("size")) {
                 sb.append(stack.size()).append("\n");
             } else if (order.equals("empty")) {
-                sb.append(stack.isEmpty() ? 1 : 0).append("\n");
+                sb.append(stack.empty() ? 1 : 0).append("\n");
             } else if (order.equals("top")) {
-                sb.append(stack.isEmpty() ? -1 : stack.peek()).append("\n");
+                sb.append(stack.empty() ? -1 : stack.peek()).append("\n");
             }
         }
         System.out.println(sb);
