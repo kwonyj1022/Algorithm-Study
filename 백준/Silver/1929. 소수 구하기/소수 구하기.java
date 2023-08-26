@@ -25,8 +25,8 @@ public class Main {
                 sb.append("3\n");
                 continue;
             }
-            long t = 2;
-            while (t * t < i) {
+            int t = 2;
+            while (t < Math.sqrt(i)) {
                 if (i % t == 0) {
                     break;
                 }
