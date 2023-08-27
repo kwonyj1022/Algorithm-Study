@@ -1,18 +1,17 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
 
-    public static void main(String[] args) {
-        int N = new Scanner(System.in).nextInt();
-        int tmp = N;
-        int n = 0;
-        while (tmp > 0) {
-            n++;
-            tmp /= 10;
-        }
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String tmpN = br.readLine();
+        int N = Integer.parseInt(tmpN);
+        int len = tmpN.length();
 
-        int s = N - 9 * n;
-        int e = N - n;
+        int s = N - len * 9;
+        int e = N - len;
         for (int i = s; i <= e; i++) {
             if (f(i) == N) {
                 System.out.println(i);
