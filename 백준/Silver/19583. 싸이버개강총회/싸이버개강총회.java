@@ -9,9 +9,9 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int S = timeToInt(st.nextToken());
-        int E = timeToInt(st.nextToken());
-        int Q = timeToInt(st.nextToken());
+        String S = st.nextToken();
+        String E = st.nextToken();
+        String Q = st.nextToken();
 
         Set<String> tmp = new HashSet<>();
         Set<String> ok = new HashSet<>();
@@ -21,20 +21,15 @@ public class Main {
                 break;
             }
             st = new StringTokenizer(s);
-            int time = timeToInt(st.nextToken());
+            String time = st.nextToken();
             String name = st.nextToken();
-            if (time <= S) {
+            if (time.compareTo(S) <= 0) {
                 tmp.add(name);
-            } else if (E <= time && time <= Q && tmp.contains(name)) {
+            } else if (E.compareTo(time) <= 0 && time.compareTo(Q) <= 0 && tmp.contains(name)) {
                 ok.add(name);
             }
         }
 
         System.out.println(ok.size());
-    }
-
-    private static int timeToInt(String str) {
-        String[] split = str.split(":");
-        return Integer.parseInt(split[0]) * 100 + Integer.parseInt(split[1]);
     }
 }
