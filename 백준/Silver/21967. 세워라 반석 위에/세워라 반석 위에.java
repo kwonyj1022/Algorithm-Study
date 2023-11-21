@@ -22,7 +22,7 @@ public class Main {
             pqA.add(input[i]);
             pqD.add(input[i]);
             e = i;
-            if (Math.max(input[i], pqD.peek()) - Math.min(input[i], pqA.peek()) > 2) {
+            if (pqD.peek() - pqA.peek() > 2) {
                 pqA.remove(input[s]);
                 pqD.remove(input[s]);
                 s++;
