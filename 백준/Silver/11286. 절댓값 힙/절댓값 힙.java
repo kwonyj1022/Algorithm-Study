@@ -9,10 +9,12 @@ public class Main {
         int N = Integer.parseInt(br.readLine());
         StringBuilder sb = new StringBuilder();
         PriorityQueue<Integer> pq = new PriorityQueue<>((o1, o2) -> {
-            if (Math.abs(o1) == Math.abs(o2)) {
+            int abs1 = Math.abs(o1);
+            int abs2 = Math.abs(o2);
+            if (abs1 == abs2) {
                 return o1 - o2;
             }
-            return Math.abs(o1) - Math.abs(o2);
+            return abs1 - abs2;
         });
         for (int i = 0; i < N; i++) {
             int x = Integer.parseInt(br.readLine());
