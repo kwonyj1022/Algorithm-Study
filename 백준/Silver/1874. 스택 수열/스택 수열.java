@@ -9,25 +9,27 @@ public class Main {
         StringBuilder sb = new StringBuilder();
         int n = Integer.parseInt(br.readLine());
         Stack<Integer> stack = new Stack<>();
-        int last = 0;
-        while (n-- > 0) {
+        int num = 1;
+        while(n-- > 0) {
             int t = Integer.parseInt(br.readLine());
-            if (stack.empty() || stack.peek() != t) {
-                if (last >= t) {
+            if (t >= num) {
+                while (t >= num) {
+                    stack.push(num++);
+                    sb.append("+\n");
+                }
+                stack.pop();
+                sb.append("-\n");
+            } else {
+                int top = stack.pop();
+                if (top == t) {
+                    sb.append("-\n");
+                } else {
                     System.out.println("NO");
                     return;
                 }
-                for (int i = last + 1; i <= t; i++) {
-                    stack.push(i);
-                    sb.append("+\n");
-                }
-                last = t;
-            }
-            if (stack.peek() == t) {
-                stack.pop();
-                sb.append("-\n");
             }
         }
         System.out.println(sb);
+        br.close();
     }
 }
