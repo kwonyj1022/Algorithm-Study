@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -13,31 +11,33 @@ public class Main {
         while (T-- > 0) {
             String p = br.readLine();
             int n = Integer.parseInt(br.readLine());
-            Deque<Integer> dq = new ArrayDeque<>();
+            int[] arr = new int[n];
             String input = br.readLine();
             StringTokenizer st = new StringTokenizer(input.substring(1, input.length() - 1), ",");
             for (int i = 0; i < n; i++) {
-                dq.offer(Integer.parseInt(st.nextToken()));
+                arr[i] = Integer.parseInt(st.nextToken());
             }
-            boolean forward = true;
+            boolean r = false;
             boolean error = false;
+            int start = 0;
+            int end = n - 1;
             int flen = p.length();
             for (int i = 0; i < flen; i++) {
                 if (p.charAt(i) == 'R') {
-                    if (forward) {
-                        forward = false;
+                    if (r) {
+                        r = false;
                     } else {
-                        forward = true;
+                        r = true;
                     }
                 } else {
-                    if (dq.isEmpty()) {
+                    if (start > end) {
                         error = true;
                         break;
                     }
-                    if (forward) {
-                        dq.pollFirst();
+                    if (r) {
+                        end--;
                     } else {
-                        dq.pollLast();
+                        start++;
                     }
                 }
             }
@@ -45,22 +45,21 @@ public class Main {
             if (error) {
                 sb.append("error\n");
             } else {
-                if (dq.isEmpty()) {
+                if (start > end) {
                     sb.append("[]\n");
                     continue;
                 }
-                int t = dq.size() - 1;
                 sb.append("[");
-                if (forward) {
-                    for (int i = 0; i < t; i++) {
-                        sb.append(dq.pollFirst()).append(",");
+                if (r) {
+                    for (int i = end; i > start; i--) {
+                        sb.append(arr[i]).append(",");
                     }
-                    sb.append(dq.pollFirst()).append("]\n");
+                    sb.append(arr[start]).append("]\n");
                 } else {
-                    for (int i = 0; i < t; i++) {
-                        sb.append(dq.pollLast()).append(",");
+                    for (int i = start; i < end; i++) {
+                        sb.append(arr[i]).append(",");
                     }
-                    sb.append(dq.pollLast()).append("]\n");
+                    sb.append(arr[end]).append("]\n");
                 }
             }
         }
