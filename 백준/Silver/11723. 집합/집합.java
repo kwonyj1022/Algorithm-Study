@@ -9,28 +9,28 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        boolean[] bit = new boolean[21];
+        int bit = 0;
         int M = Integer.parseInt(br.readLine());
         while (M-- > 0) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             String act = st.nextToken();
             int x = st.hasMoreTokens() ? Integer.parseInt(st.nextToken()) : 0;
             if ("add".equals(act)) {
-                bit[x] = true;
+                bit |= 1 << x;
             } else if ("remove".equals(act)) {
-                bit[x] = false;
+                bit &= ~(1 << x);
             } else if ("check".equals(act)) {
-                bw.write(bit[x] ? "1\n" : "0\n");
+                bw.write((bit & 1 << x) == 0 ? "0\n" : "1\n");
             } else if ("toggle".equals(act)) {
-                bit[x] = bit[x] ? false : true;
+                if ((bit & 1 << x) == 0) {
+                    bit |= 1 << x;
+                } else {
+                    bit &= ~(1 << x);
+                }
             } else if ("all".equals(act)) {
-                for (int i = 1; i < 21; i++) {
-                    bit[i] = true;
-                }
+                bit = 0b111111111111111111111;
             } else if ("empty".equals(act)) {
-                for (int i = 1; i < 21; i++) {
-                    bit[i] = false;
-                }
+                bit = 0;
             }
         }
         bw.flush();
