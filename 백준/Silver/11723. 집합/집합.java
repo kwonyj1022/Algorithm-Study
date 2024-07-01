@@ -15,21 +15,21 @@ public class Main {
             StringTokenizer st = new StringTokenizer(br.readLine());
             String act = st.nextToken();
             int x = st.hasMoreTokens() ? Integer.parseInt(st.nextToken()) : 0;
-            if ("add".equals(act)) {
+            if (act.charAt(0) == 'a' && act.charAt(1) == 'd') {
                 bit |= 1 << x;
-            } else if ("remove".equals(act)) {
+            } else if (act.charAt(0) == 'r') {
                 bit &= ~(1 << x);
-            } else if ("check".equals(act)) {
+            } else if (act.charAt(0) == 'c') {
                 bw.write((bit & 1 << x) == 0 ? "0\n" : "1\n");
-            } else if ("toggle".equals(act)) {
+            } else if (act.charAt(0) == 't') {
                 if ((bit & 1 << x) == 0) {
                     bit |= 1 << x;
                 } else {
                     bit &= ~(1 << x);
                 }
-            } else if ("all".equals(act)) {
+            } else if (act.charAt(0) == 'a' && act.charAt(1) == 'l') {
                 bit = 0b111111111111111111111;
-            } else if ("empty".equals(act)) {
+            } else if (act.charAt(0) == 'e') {
                 bit = 0;
             }
         }
