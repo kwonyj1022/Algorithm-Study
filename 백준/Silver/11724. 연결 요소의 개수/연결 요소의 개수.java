@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayDeque;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -31,24 +29,19 @@ public class Main {
         for (int i = 1; i <= N; i++) {
             if (!visited[i]) {
                 cnt++;
-                bfs(i);
+                dfs(i);
             }
         }
 
         System.out.println(cnt);
     }
 
-    private static void bfs(int x) {
-        Queue<Integer> q = new ArrayDeque<>();
+    private static void dfs(int x) {
         visited[x] = true;
-        q.offer(x);
-        while (!q.isEmpty()) {
-            int poll = q.poll();
-            for (int i = 1; i <= N; i++) {
-                if (!visited[i] && arr[poll][i]) {
-                    visited[i] = true;
-                    q.offer(i);
-                }
+        for (int i = 1; i <= N; i++) {
+            if (!visited[i] && arr[x][i]) {
+                visited[i] = true;
+                dfs(i);
             }
         }
     }
