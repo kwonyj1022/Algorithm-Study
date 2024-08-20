@@ -15,29 +15,23 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
-        arr = new int[N + 1];
+        arr = new int[M];
         sb = new StringBuilder();
         solve(0, 1);
         System.out.print(sb);
     }
 
-    static void solve(int cnt, int recent) {
-        if (cnt == M) {
-            for (int i = 1; i <= N; i++) {
-                if(arr[i] > 0) {
-                    for (int j = 0; j < arr[i]; j++) {
-                        sb.append(i).append(" ");
-                    }
-                }
+    static void solve(int depth, int recent) {
+        if (depth == M) {
+            for (int i = 0; i < M; i++) {
+                sb.append(arr[i]).append(" ");
             }
             sb.append("\n");
             return;
         }
-        cnt++;
         for (int i = recent; i <= N; i++) {
-            arr[i]++;
-            solve(cnt, i);
-            arr[i]--;
+            arr[depth] = i;
+            solve(depth + 1, i);
         }
     }
 }
