@@ -34,9 +34,9 @@ public class Main {
     static void solve(int depth) {
         if (depth == M) {
             for (int i = 0; i < M; i++) {
-                sb.append(pick[i]).append(" ");
+                sb.append(pick[i]).append(' ');
             }
-            sb.append("\n");
+            sb.append('\n');
             return;
         }
         for (int i = 0; i < N; i++) {
