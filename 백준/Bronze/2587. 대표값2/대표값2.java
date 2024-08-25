@@ -12,6 +12,7 @@ public class Main {
             arr[i] = Integer.parseInt(br.readLine());
             sum += arr[i];
         }
+        br.close();
         Arrays.sort(arr);
         StringBuilder sb = new StringBuilder();
         sb.append(sum / 5).append("\n").append(arr[2]);
