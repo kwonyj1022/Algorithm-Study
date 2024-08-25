@@ -13,6 +13,8 @@ public class Main {
             sum += arr[i];
         }
         Arrays.sort(arr);
-        System.out.print(sum / 5 + "\n" + arr[2]);
+        StringBuilder sb = new StringBuilder();
+        sb.append(sum / 5).append("\n").append(arr[2]);
+        System.out.print(sb);
     }
 }
