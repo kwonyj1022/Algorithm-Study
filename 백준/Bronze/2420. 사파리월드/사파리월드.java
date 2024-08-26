@@ -10,5 +10,6 @@ public class Main {
         long N = Long.parseLong(st.nextToken());
         long M = Long.parseLong(st.nextToken());
         System.out.print(Math.abs(N - M));
+        br.close();
     }
 }
