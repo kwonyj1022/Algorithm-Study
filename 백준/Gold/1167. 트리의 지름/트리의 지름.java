@@ -35,6 +35,7 @@ public class Main {
         visited = new boolean[V + 1];
         findFarNode(farNode, 0);
         System.out.print(maxLen);
+        br.close();
     }
 
     static void findFarNode(int to, int currentLen) {
