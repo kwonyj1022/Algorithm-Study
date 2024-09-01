@@ -1,3 +1,5 @@
+import org.w3c.dom.Node;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,45 +16,33 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int A = Integer.parseInt(st.nextToken());
         int B = Integer.parseInt(st.nextToken());
-        Queue<Node> q = new ArrayDeque<>();
-        q.offer(new Node(B, 1));
+        Queue<Integer> q = new ArrayDeque<>();
+        q.offer(B);
         Set<Integer> visited = new HashSet<>();
         visited.add(B);
+        int cnt = 1;
         while (!q.isEmpty()) {
-            Node node = q.poll();
-            if (node.n % 2 == 0) {
-                int t = node.n / 2;
-                if (t == A) {
-                    System.out.print(node.cnt + 1);
-                    return;
-                }
+            int n = q.poll();
+            if (n == A) {
+                System.out.print(cnt);
+                return;
+            }
+            cnt++;
+            if (n % 2 == 0) {
+                int t = n / 2;
                 if (t > 0 && !visited.contains(t)) {
-                    q.offer(new Node(t, node.cnt + 1));
+                    q.offer(t);
                     visited.add(t);
                 }
             }
-            if (node.n % 10 == 1) {
-                int t = (node.n - 1) / 10;
-                if (t == A) {
-                    System.out.print(node.cnt + 1);
-                    return;
-                }
+            if (n % 10 == 1) {
+                int t = (n - 1) / 10;
                 if (t > 0 && !visited.contains(t)) {
-                    q.offer(new Node(t, node.cnt + 1));
+                    q.offer(t);
                     visited.add(t);
                 }
             }
         }
         System.out.print(-1);
-    }
-
-    static class Node {
-        int n;
-        int cnt;
-
-        public Node(int n, int cnt) {
-            this.n = n;
-            this.cnt = cnt;
-        }
     }
 }
