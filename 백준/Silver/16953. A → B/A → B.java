@@ -15,38 +15,42 @@ public class Main {
         int A = Integer.parseInt(st.nextToken());
         int B = Integer.parseInt(st.nextToken());
         Queue<Node> q = new ArrayDeque<>();
-        q.offer(new Node(A, 1));
+        q.offer(new Node(B, 1));
         Set<Integer> visited = new HashSet<>();
-        visited.add(A);
+        visited.add(B);
         while (!q.isEmpty()) {
             Node node = q.poll();
-            long t = node.n * 2;
-            if (t == B) {
-                System.out.print(node.cnt + 1);
-                return;
+            if (node.n % 2 == 0) {
+                int t = node.n / 2;
+                if (t == A) {
+                    System.out.print(node.cnt + 1);
+                    return;
+                }
+                if (t > 0 && !visited.contains(t)) {
+                    q.offer(new Node(t, node.cnt + 1));
+                    visited.add(t);
+                }
             }
-            if (t <= 1000000000 && !visited.contains(t)) {
-                q.offer(new Node(t, node.cnt + 1));
-                visited.add((int) t);
-            }
-            t = node.n * 10 + 1;
-            if (t == B) {
-                System.out.print(node.cnt + 1);
-                return;
-            }
-            if (t <= 1000000000 && !visited.contains(t)) {
-                q.offer(new Node(t, node.cnt + 1));
-                visited.add((int) t);
+            if (node.n % 10 == 1) {
+                int t = (node.n - 1) / 10;
+                if (t == A) {
+                    System.out.print(node.cnt + 1);
+                    return;
+                }
+                if (t > 0 && !visited.contains(t)) {
+                    q.offer(new Node(t, node.cnt + 1));
+                    visited.add(t);
+                }
             }
         }
         System.out.print(-1);
     }
 
     static class Node {
-        long n;
+        int n;
         int cnt;
 
-        public Node(long n, int cnt) {
+        public Node(int n, int cnt) {
             this.n = n;
             this.cnt = cnt;
         }
