@@ -27,6 +27,7 @@ public class Main {
             sb.append(cache[N]).append('\n');
         }
 
+        br.close();
         System.out.print(sb);
     }
 }
