@@ -31,16 +31,4 @@ public class Main {
         }
         System.out.print(sb);
     }
-
-    static class Sticker {
-        int r;
-        int c;
-        int score;
-
-        public Sticker(int r, int c, int score) {
-            this.r = r;
-            this.c = c;
-            this.score = score;
-        }
-    }
 }
