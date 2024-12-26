@@ -36,7 +36,7 @@ public class Main {
             assign(student);
         }
         for (Student student : students) {
-            int nearLikesCnt = getNearLikesCnt(student, student.seat[0], student.seat[1]);
+            int nearLikesCnt = getScore(student, student.seat[0], student.seat[1]) / 10;
             totalSatisfaction += satisfaction[nearLikesCnt];
         }
         System.out.print(totalSatisfaction);
@@ -44,15 +44,10 @@ public class Main {
 
     static void assign(Student student) {
         PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2) -> {
-            int o1NearLikesCnt = getNearLikesCnt(student, o1[0], o1[1]);
-            int o2NearLikesCnt = getNearLikesCnt(student, o2[0], o2[1]);
-            if (o1NearLikesCnt != o2NearLikesCnt) {
-                return o2NearLikesCnt - o1NearLikesCnt;
-            }
-            int o1NearBlank = getNearBlankCnt(o1[0], o1[1]);
-            int o2NearBlank = getNearBlankCnt(o2[0], o2[1]);
-            if (o1NearBlank != o2NearBlank) {
-                return o2NearBlank - o1NearBlank;
+            int o1Score = getScore(student, o1[0], o1[1]);
+            int o2Score = getScore(student, o2[0], o2[1]);
+            if (o1Score != o2Score) {
+                return o2Score - o1Score;
             }
             if (o1[0] != o2[0]) {
                 return o1[0] - o2[0];
@@ -73,32 +68,21 @@ public class Main {
         student.seat = seat;
     }
 
-    static int getNearLikesCnt(Student student, int r, int c) {
-        int cnt = 0;
+    static int getScore(Student student, int r, int c) {
+        int score = 0;
         for (int i = 0; i < 4; i++) {
             int nr = r + dr[i];
             int nc = c + dc[i];
-            if (nr >= 0 && nr < N && nc >= 0 && nc < N && map[nr][nc] != 0) {
-                if (student.likes.contains(map[nr][nc])) {
-                    cnt++;
+            if (nr >= 0 && nr < N && nc >= 0 && nc < N) {
+                if (map[nr][nc] == 0) {
+                    score++;
+                } else if (student.likes.contains(map[nr][nc])) {
+                    score += 10;
                 }
             }
         }
 
-        return cnt;
-    }
-
-    static int getNearBlankCnt(int r, int c) {
-        int blank = 0;
-        for (int i = 0; i < 4; i++) {
-            int nr = r + dr[i];
-            int nc = c + dc[i];
-            if (nr >= 0 && nr < N && nc >= 0 && nc < N && map[nr][nc] == 0) {
-                blank++;
-            }
-        }
-
-        return blank;
+        return score;
     }
 
     static class Student {
