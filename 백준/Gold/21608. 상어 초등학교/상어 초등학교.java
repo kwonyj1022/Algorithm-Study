@@ -43,8 +43,6 @@ public class Main {
     }
 
     static void assign(Student student) {
-        int bestRow = 0;
-        int bestCol = 0;
         PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2) -> {
             int o1NearLikesCnt = getNearLikesCnt(student, o1[0], o1[1]);
             int o2NearLikesCnt = getNearLikesCnt(student, o2[0], o2[1]);
