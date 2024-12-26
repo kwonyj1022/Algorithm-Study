@@ -70,7 +70,7 @@ public class Main {
             }
         }
 
-        int[] seat = pq.poll();
+        int[] seat = pq.peek();
         map[seat[0]][seat[1]] = student.number;
         student.seat = seat;
     }
