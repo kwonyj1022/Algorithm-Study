@@ -13,12 +13,15 @@ public class Main {
         N = Integer.parseInt(br.readLine());
         int col = N * 2 - 1;
         arr = new char[N][col];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < col; j++) {
+                arr[i][j] = ' ';
+            }
+        }
         sb = new StringBuilder();
         star(0, 0, N);
         for (int i = 0; i < N; i++) {
-            for (int j = 0; j < col; j++) {
-                sb.append(arr[i][j] == '*' ? '*' : ' ');
-            }
+            sb.append(arr[i]);
             sb.append('\n');
         }
         System.out.print(sb);
