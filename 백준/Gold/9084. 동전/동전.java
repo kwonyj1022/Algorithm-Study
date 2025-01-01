@@ -17,23 +17,19 @@ public class Main {
                 coin[i] = Integer.parseInt(st.nextToken());
             }
             int M = Integer.parseInt(br.readLine());
-            sb.append(solve(N, coin, M)).append("\n");
-        }
-        System.out.print(sb);
-    }
-
-    static int solve(int n, int[] coin, int m) {
-        int[] dp = new int[m + 1];
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= m; j++) {
-                final int t = j - coin[i];
-                if (t == 0) {
-                    dp[j]++;
-                } else if (t > 0) {
-                    dp[j] = dp[j] + dp[t];
+            int[] dp = new int[M + 1];
+            for (int i = 1; i <= N; i++) {
+                for (int j = 1; j <= M; j++) {
+                    final int t = j - coin[i];
+                    if (t == 0) {
+                        dp[j]++;
+                    } else if (t > 0) {
+                        dp[j] = dp[j] + dp[t];
+                    }
                 }
             }
+            sb.append(dp[M]).append("\n");
         }
-        return dp[m];
+        System.out.print(sb);
     }
 }
