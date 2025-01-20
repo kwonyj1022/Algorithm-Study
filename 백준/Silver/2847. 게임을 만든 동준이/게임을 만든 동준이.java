@@ -15,9 +15,8 @@ public class Main {
         int answer = 0;
         for (int i = N - 2; i >= 0; i--) {
             if (arr[i] >= arr[i + 1]) {
-                int newScore = arr[i + 1] - 1;
-                answer += arr[i] - newScore;
-                arr[i] = newScore;
+                answer += arr[i] - arr[i + 1] + 1;
+                arr[i] = arr[i + 1] - 1;
             }
         }
         System.out.print(answer);
