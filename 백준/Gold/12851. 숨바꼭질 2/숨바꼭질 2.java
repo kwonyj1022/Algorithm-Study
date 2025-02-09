@@ -20,7 +20,6 @@ public class Main {
 
         q.offer(N);
 
-        int answer = 0;
         int cnt = 0;
 
         int[] dx = {1, -1};
@@ -63,12 +62,11 @@ public class Main {
             }
 
             if (found) {
-                answer = visited[K] - 1;
                 break;
             }
         }
 
-        System.out.println(answer);
+        System.out.println(visited[K] - 1);
         System.out.println(cnt);
     }
 }
