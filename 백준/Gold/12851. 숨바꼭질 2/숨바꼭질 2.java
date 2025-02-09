@@ -36,14 +36,15 @@ public class Main {
                     cnt += count[poll];
                 }
 
+                int level = visited[poll] + 1;
                 for (int i = 0; i < 2; i++) {
                     int tmp = poll + dx[i];
                     if (tmp >= 0 && tmp < 100001) {
                         if (visited[tmp] == 0) {
-                            visited[tmp] = visited[poll] + 1;
+                            visited[tmp] = level;
                             count[tmp] = count[poll];
                             q.offer(tmp);
-                        } else if (visited[tmp] == visited[poll] + 1) {
+                        } else if (visited[tmp] == level) {
                             count[tmp] += count[poll];
                         }
                     }
@@ -52,10 +53,10 @@ public class Main {
                 int tmp = poll * 2;
                 if (tmp >= 0 && tmp < 100001) {
                     if (visited[tmp] == 0) {
-                        visited[tmp] = visited[poll] + 1;
+                        visited[tmp] = level;
                         count[tmp] = count[poll];
                         q.offer(tmp);
-                    } else if (visited[tmp] == visited[poll] + 1) {
+                    } else if (visited[tmp] == level) {
                         count[tmp] += count[poll];
                     }
                 }
