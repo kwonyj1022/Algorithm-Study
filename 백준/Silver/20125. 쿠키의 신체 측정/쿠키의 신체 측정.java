@@ -22,8 +22,8 @@ public class Main {
                     continue;
                 }
                 if (i == heart[0]) {
-                    if (j < heart[1]) {
-                        answer[0]++;
+                    if (j < heart[1] && answer[0] == 0) {
+                        answer[0] = heart[1] - j;
                     } else if (j > heart[1]) {
                         answer[1]++;
                     }
