@@ -1,53 +1,74 @@
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
 
-class Main{
-    static int N,D;
-    static List<List<Node>> graph = new ArrayList<>();
+public class Main {
+    static int N, D;
+    static List<int[]>[] info;
     static int[] distance;
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         D = Integer.parseInt(st.nextToken());
-        for(int i=0;i<=10001;i++) graph.add(new ArrayList<>());
-        distance = new int[10001];
-        for(int i=0;i<distance.length;i++) distance[i] = i;
+        info = new ArrayList[D + 1];
+        distance = new int[D + 1];
 
-        for(int i=0;i<N;i++){
+        for (int i = 0; i <= D; i++) {
+            info[i] = new ArrayList<>();
+            distance[i] = Integer.MAX_VALUE;
+        }
+
+        for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
-            int w = Integer.parseInt(st.nextToken());
-            graph.get(a).add(new Node(b,w));
+            int s = Integer.parseInt(st.nextToken());
+            int e = Integer.parseInt(st.nextToken());
+            int d = Integer.parseInt(st.nextToken());
+
+            if (e > D || e - s <= d) {
+                continue;
+            }
+
+            info[s].add(new int[]{e, d});
         }
 
-        dijkstra(0);
+        dijkstra();
 
-        System.out.println(distance[D]);
+        System.out.print(distance[D]);
     }
 
-    static void dijkstra(int start){
-        if(start>D) return;
+    static void dijkstra() {
+        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[1]));
+        pq.add(new int[]{0, 0});
+        distance[0] = 0;
 
-        if(distance[start+1] > distance[start] + 1) distance[start+1] = distance[start]+1;
+        while (!pq.isEmpty()) {
+            int[] current = pq.poll();
+            int p = current[0];
+            int d = current[1];
 
-        for(int i=0;i<graph.get(start).size();i++){
-            if(distance[start]+graph.get(start).get(i).weight < distance[graph.get(start).get(i).node])
-                distance[graph.get(start).get(i).node] = distance[start]+graph.get(start).get(i).weight;
-        }
+            if (distance[p] < d) {
+                continue;
+            }
 
-        dijkstra(start+1);
-    }
+            if (p < D && distance[p + 1] > d + 1) {
+                distance[p + 1] = d + 1;
+                pq.add(new int[]{p + 1, d + 1});
+            }
 
-    static class Node {
-        int node;
-        int weight;
+            for (int[] road : info[p]) {
 
-        Node(int node, int weight){
-            this.node = node;
-            this.weight = weight;
+                if (distance[road[0]] > d + road[1]) {
+                    distance[road[0]] = d + road[1];
+                    pq.add(new int[]{road[0], distance[road[0]]});
+                }
+            }
         }
     }
 }
