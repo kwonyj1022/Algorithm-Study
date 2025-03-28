@@ -12,10 +12,10 @@ public class Main {
         int N = Integer.parseInt(st.nextToken());
         int K = Integer.parseInt(st.nextToken());
         Country[] countries = new Country[N + 1];
-        countries[0] = new Country(0, Character.MAX_VALUE, Character.MAX_VALUE, Character.MAX_VALUE);
+        countries[0] = new Country(0, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
         for (int i = 1; i <= N; i++) {
             st = new StringTokenizer(br.readLine());
-            int n = st.nextToken().charAt(0) - '0';
+            int n = Integer.parseInt(st.nextToken());
             countries[n] = new Country(
                     n,
                     Integer.parseInt(st.nextToken()),
@@ -33,22 +33,19 @@ public class Main {
             return o2.bronze - o1.bronze;
         });
 
-        int answer = 0;
-        int same = 1;
         Country pre = countries[0];
         for (int i = 1; i <= N; i++) {
             if ((pre.gold == countries[i].gold) && (pre.silver == countries[i].silver) && (pre.bronze == countries[i].bronze)) {
-                same++;
+                countries[i].rank = pre.rank;
             } else {
-                answer += same;
-                same = 1;
+                countries[i].rank = i;
             }
+            pre = countries[i];
             if (countries[i].n == K) {
                 break;
             }
-            pre = countries[i];
         }
-        System.out.print(answer);
+        System.out.print(pre.rank);
     }
 
     static class Country {
@@ -56,12 +53,14 @@ public class Main {
         int gold;
         int silver;
         int bronze;
+        int rank;
 
         Country(int n, int gold, int silver, int bronze) {
             this.n = n;
             this.gold = gold;
             this.silver = silver;
             this.bronze = bronze;
+            rank = -1;
         }
     }
 }
