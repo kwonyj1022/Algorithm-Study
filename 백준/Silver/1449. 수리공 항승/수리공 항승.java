@@ -15,15 +15,14 @@ public class Main {
         }
         Arrays.sort(arr);
         int answer = 0;
-        double tapeEnd = 0;
-
+        int end = -1;
         for (int i = 0; i < N; i++) {
-            if (arr[i] > tapeEnd) {
-                tapeEnd = arr[i] - 0.5 + L;
-                answer++;
+            if (arr[i] <= end) {
+                continue;
             }
+            end = arr[i] + L - 1;
+            answer++;
         }
-        
         System.out.print(answer);
 	}
 }
