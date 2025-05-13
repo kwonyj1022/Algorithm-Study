@@ -6,10 +6,10 @@ public class Main {
     static int N;
     static int[][] board;
     static int answer;
-	
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		N = Integer.parseInt(br.readLine());
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(br.readLine());
         board = new int[N][N];
         StringTokenizer st;
         for (int i = 0; i < N; i++) {
@@ -21,7 +21,7 @@ public class Main {
         answer = 0;
         solve(0);
         System.out.print(answer);
-	}
+    }
 
     static void solve(int tryCnt) {
         if (tryCnt == 5) {
@@ -57,9 +57,7 @@ public class Main {
     static int[][] copy(int[][] target) {
         int[][] copy = new int[N][N];
         for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                copy[i][j] = target[i][j];
-            }
+            System.arraycopy(target[i], 0, copy[i], 0, N);
         }
         return copy;
     }
@@ -101,7 +99,7 @@ public class Main {
             }
         }
     }
-    
+
     static void right() {
         for (int i = 0; i < N; i++) {
             int pos = N - 1;
